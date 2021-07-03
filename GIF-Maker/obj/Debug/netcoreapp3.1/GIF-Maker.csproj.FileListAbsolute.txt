@@ -1,0 +1,15 @@
+C:\Users\erikr\Documents\GitHub\GIF-Maker\GIF-Maker\bin\Debug\netcoreapp3.1\GIF-Maker.exe
+C:\Users\erikr\Documents\GitHub\GIF-Maker\GIF-Maker\bin\Debug\netcoreapp3.1\GIF-Maker.deps.json
+C:\Users\erikr\Documents\GitHub\GIF-Maker\GIF-Maker\bin\Debug\netcoreapp3.1\GIF-Maker.runtimeconfig.json
+C:\Users\erikr\Documents\GitHub\GIF-Maker\GIF-Maker\bin\Debug\netcoreapp3.1\GIF-Maker.runtimeconfig.dev.json
+C:\Users\erikr\Documents\GitHub\GIF-Maker\GIF-Maker\bin\Debug\netcoreapp3.1\GIF-Maker.dll
+C:\Users\erikr\Documents\GitHub\GIF-Maker\GIF-Maker\bin\Debug\netcoreapp3.1\GIF-Maker.pdb
+C:\Users\erikr\Documents\GitHub\GIF-Maker\GIF-Maker\obj\Debug\netcoreapp3.1\GIF-Maker.csproj.AssemblyReference.cache
+C:\Users\erikr\Documents\GitHub\GIF-Maker\GIF-Maker\obj\Debug\netcoreapp3.1\GIF_Maker.Form1.resources
+C:\Users\erikr\Documents\GitHub\GIF-Maker\GIF-Maker\obj\Debug\netcoreapp3.1\GIF-Maker.csproj.GenerateResource.cache
+C:\Users\erikr\Documents\GitHub\GIF-Maker\GIF-Maker\obj\Debug\netcoreapp3.1\GIF-Maker.AssemblyInfoInputs.cache
+C:\Users\erikr\Documents\GitHub\GIF-Maker\GIF-Maker\obj\Debug\netcoreapp3.1\GIF-Maker.AssemblyInfo.cs
+C:\Users\erikr\Documents\GitHub\GIF-Maker\GIF-Maker\obj\Debug\netcoreapp3.1\GIF-Maker.csproj.CoreCompileInputs.cache
+C:\Users\erikr\Documents\GitHub\GIF-Maker\GIF-Maker\obj\Debug\netcoreapp3.1\GIF-Maker.dll
+C:\Users\erikr\Documents\GitHub\GIF-Maker\GIF-Maker\obj\Debug\netcoreapp3.1\GIF-Maker.pdb
+C:\Users\erikr\Documents\GitHub\GIF-Maker\GIF-Maker\obj\Debug\netcoreapp3.1\GIF-Maker.genruntimeconfig.cache
