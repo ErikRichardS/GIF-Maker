@@ -16,11 +16,12 @@ namespace GIF_Maker
 
         int gifHeight;
         int gifWidth;
+        int repeat = 0;
 
         BinaryWriter writer;
 
 
-        public GifWriter(string fileName, int height, int width)
+        public GifWriter(string fileName, int width, int height)
         {
 
             gifHeight = height;
@@ -31,15 +32,14 @@ namespace GIF_Maker
 
 
         public void WriteFrame(LinkedList<Image> imageList, int delay)
-        {           
+        {
+            bool firstFrame = true;
 
-            using (var gifStream = new MemoryStream())
+            foreach (Image image in imageList)
             {
-                bool firstFrame = true;
-
-                foreach(Image image in imageList)
+                using (var gifStream = new MemoryStream())
                 {
-                    Image imageResized = ImageResize.Resize(image, gifWidth, gifHeight);
+                
                     image.Save( gifStream, ImageFormat.Gif );
 
                     // Steal the global color table info
@@ -49,9 +49,9 @@ namespace GIF_Maker
                     WriteGraphicControlBlock(gifStream, writer, delay);
                     WriteImageBlock(gifStream, writer, !firstFrame, 0, 0);
 
-                    firstFrame = false;
+                    
                 }
-                
+                firstFrame = false;
             }
         }
 
@@ -78,7 +78,7 @@ namespace GIF_Maker
             writer.Write( "NETSCAPE2.0".ToCharArray() ); // Application Identifier
             writer.Write( (byte)3 ); // Application block length
             writer.Write( (byte)1 );
-            writer.Write( (short)0 ); // Repeat count for images.
+            writer.Write( (short)repeat ); // Repeat count for images.
             writer.Write( (byte)0 ); // terminator
         }
 

@@ -15,7 +15,8 @@ namespace GIF_Maker
 
 
         LinkedList<Image> imageTimelineList = new LinkedList<Image>();
-        //LinkedList<System.Windows.Forms.PictureBox> imageTimelineBoxes = new LinkedList<System.Windows.Forms.PictureBox>();
+        LinkedList<Image> imageResized = new LinkedList<Image>();
+        
 
         LinkedList<Image>.Enumerator timelineIterator;
 
@@ -28,7 +29,6 @@ namespace GIF_Maker
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                //pictureBoxMain.Load(openFileDialog1.FileName);
 
                 imageTimelineList.AddLast(Image.FromFile(openFileDialog1.FileName));
                 updateTimelineList();
@@ -39,11 +39,13 @@ namespace GIF_Maker
         {
             if(saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                consoleLabel.Text = saveFileDialog1.FileName;
+                consoleLabel.Text = ""+ numericTickDelay.Value;
 
-                GifWriter gifMaker = new GifWriter(saveFileDialog1.FileName, (int)numericHeight.Value, (int)numericWidth.Value);
+                updateResizedImageList();
 
-                gifMaker.WriteFrame(imageTimelineList, (int)numericTickDelay.Value);
+                GifWriter gifMaker = new GifWriter(saveFileDialog1.FileName, (int)numericWidth.Value, (int)numericHeight.Value);
+
+                gifMaker.WriteFrame(imageResized, (int)numericTickDelay.Value);
 
                 gifMaker.Dispose();
             }
@@ -67,7 +69,9 @@ namespace GIF_Maker
 
             if (!timerTimeline.Enabled)
             {
-                timelineIterator = imageTimelineList.GetEnumerator();
+                updateResizedImageList();
+
+                timelineIterator = imageResized.GetEnumerator();
 
                 if(timelineIterator.MoveNext())
                     pictureBoxMain.Image = timelineIterator.Current;
@@ -99,12 +103,21 @@ namespace GIF_Maker
                 // The iterator reached the end, dispose of current iterator and restart with a new one
                 // (This iterator has no reset functionality.)
                 timelineIterator.Dispose();
-                timelineIterator = imageTimelineList.GetEnumerator();
+                timelineIterator = imageResized.GetEnumerator();
 
                 if (timelineIterator.MoveNext())
                     pictureBoxMain.Image = timelineIterator.Current;
             }
             
+        }
+
+        private void updateResizedImageList()
+        {
+            imageResized.Clear();
+            foreach (Image image in imageTimelineList)
+            {
+                imageResized.AddLast(ImageResize.Resize(image, (int)numericWidth.Value, (int)numericHeight.Value));
+            }
         }
 
 
