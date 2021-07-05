@@ -15,10 +15,13 @@ namespace GIF_Maker
 
 
         LinkedList<Image> imageTimelineList = new LinkedList<Image>();
-        LinkedList<Image> imageResized = new LinkedList<Image>();
-        
 
+        // Used for when playing up the GIF
+        LinkedList<Image> imageTimelineResized = new LinkedList<Image>();
         LinkedList<Image>.Enumerator timelineIterator;
+
+
+        System.Windows.Forms.PictureBox selectedImage = null;
 
         public Form1()
         {
@@ -29,9 +32,7 @@ namespace GIF_Maker
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-
-                imageTimelineList.AddLast(Image.FromFile(openFileDialog1.FileName));
-                updateTimelineList();
+                addImageToTimeline(Image.FromFile(openFileDialog1.FileName));
             }
         }
 
@@ -45,24 +46,30 @@ namespace GIF_Maker
 
                 GifWriter gifMaker = new GifWriter(saveFileDialog1.FileName, (int)numericWidth.Value, (int)numericHeight.Value);
 
-                gifMaker.WriteFrame(imageResized, (int)numericTickDelay.Value);
+                gifMaker.WriteFrame(imageTimelineResized, (int)numericTickDelay.Value);
 
                 gifMaker.Dispose();
             }
         }
 
-        private void updateTimelineList()
+        private void addImageToTimeline(Image img)
         {
 
             System.Windows.Forms.PictureBox imageBox = new System.Windows.Forms.PictureBox();
-            imageBox.Image = imageTimelineList.Last();
-            imageBox.Height = imageTimelinePanel.Height/2;
-            imageBox.Width = imageTimelinePanel.Height/2;
+            imageBox.Image = img;
+            imageBox.Height = imageTimelinePanel.Height-50;
+            imageBox.Width = imageTimelinePanel.Height-50;
             imageBox.SizeMode = PictureBoxSizeMode.StretchImage;
+
+
+            ImageClickEventArgs args = new ImageClickEventArgs();
+            args.Index = imageTimelineList.Count;
+            imageBox.Click += new EventHandler((s, e) => timelineImage_Click(s, args));
 
             imageTimelinePanel.Width += imageTimelinePanel.Height;
             imageTimelinePanel.Controls.Add(imageBox);
-            //imageTimelinePanel.Controls.IndexOf(0);
+
+            imageTimelineList.AddLast(img);
         }
 
         private void buttonPlay_Click(object sender, EventArgs e)
@@ -72,7 +79,7 @@ namespace GIF_Maker
             {
                 updateResizedImageList();
 
-                timelineIterator = imageResized.GetEnumerator();
+                timelineIterator = imageTimelineResized.GetEnumerator();
 
                 if(timelineIterator.MoveNext())
                     pictureBoxMain.Image = timelineIterator.Current;
@@ -104,7 +111,7 @@ namespace GIF_Maker
                 // The iterator reached the end, dispose of current iterator and restart with a new one
                 // (This iterator has no reset functionality.)
                 timelineIterator.Dispose();
-                timelineIterator = imageResized.GetEnumerator();
+                timelineIterator = imageTimelineResized.GetEnumerator();
 
                 if (timelineIterator.MoveNext())
                     pictureBoxMain.Image = timelineIterator.Current;
@@ -114,11 +121,39 @@ namespace GIF_Maker
 
         private void updateResizedImageList()
         {
-            imageResized.Clear();
+            imageTimelineResized.Clear();
             foreach (Image image in imageTimelineList)
             {
-                imageResized.AddLast(ImageResize.Resize(image, (int)numericWidth.Value, (int)numericHeight.Value));
+                imageTimelineResized.AddLast(ImageResize.Resize(image, (int)numericWidth.Value, (int)numericHeight.Value));
             }
         }
+
+
+        public void timelineImage_Click(object sender, ImageClickEventArgs e)
+        {
+            System.Windows.Forms.PictureBox box = sender as System.Windows.Forms.PictureBox;
+
+
+            if (selectedImage != null)
+            {
+                selectedImage.BorderStyle = BorderStyle.None;
+                selectedImage = box;
+                selectedImage.BorderStyle = BorderStyle.Fixed3D;
+            }
+            else
+            {
+                selectedImage = box;
+                selectedImage.BorderStyle = BorderStyle.Fixed3D;
+            }
+
+            pictureBoxMain.Image = ImageResize.Resize( imageTimelineList.ElementAt(e.Index), (int)numericWidth.Value, (int)numericHeight.Value);
+            consoleLabel.Text = ""+e.Index;
+        }
+    }
+
+    public class ImageClickEventArgs : EventArgs
+    {
+        public int Index { get; set; }
+        //public DateTime TimeReached { get; set; }
     }
 }

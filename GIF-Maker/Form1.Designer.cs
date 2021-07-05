@@ -116,18 +116,17 @@ namespace GIF_Maker
             this.pictureBoxMain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxMain.TabIndex = 2;
             this.pictureBoxMain.TabStop = false;
+            this.pictureBoxMain.Tag = "";
             // 
             // imageTimelinePanel
             // 
             this.imageTimelinePanel.AutoScroll = true;
-            this.imageTimelinePanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel1.SetColumnSpan(this.imageTimelinePanel, 4);
             this.imageTimelinePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.imageTimelinePanel.Location = new System.Drawing.Point(0, 600);
             this.imageTimelinePanel.Margin = new System.Windows.Forms.Padding(0);
-            this.imageTimelinePanel.MaximumSize = new System.Drawing.Size(0, 145);
             this.imageTimelinePanel.Name = "imageTimelinePanel";
-            this.imageTimelinePanel.Size = new System.Drawing.Size(1315, 145);
+            this.imageTimelinePanel.Size = new System.Drawing.Size(1315, 150);
             this.imageTimelinePanel.TabIndex = 17;
             this.imageTimelinePanel.WrapContents = false;
             // 
@@ -317,7 +316,7 @@ namespace GIF_Maker
             this.numericHeight.Size = new System.Drawing.Size(180, 50);
             this.numericHeight.TabIndex = 7;
             this.numericHeight.Value = new decimal(new int[] {
-            10,
+            50,
             0,
             0,
             0});
@@ -363,7 +362,7 @@ namespace GIF_Maker
             this.numericWidth.Size = new System.Drawing.Size(180, 50);
             this.numericWidth.TabIndex = 6;
             this.numericWidth.Value = new decimal(new int[] {
-            10,
+            50,
             0,
             0,
             0});
