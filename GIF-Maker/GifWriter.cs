@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace GIF_Maker
 {
+
+    // Much of the codde taken from https://stackoverflow.com/questions/1196322/how-to-create-an-animated-gif-in-net
+    // Rewritten to be more understandable
     class GifWriter
     {
 
@@ -16,7 +19,6 @@ namespace GIF_Maker
 
         int gifHeight;
         int gifWidth;
-        int repeat = 0;
 
         BinaryWriter writer;
 
@@ -78,7 +80,7 @@ namespace GIF_Maker
             writer.Write( "NETSCAPE2.0".ToCharArray() ); // Application Identifier
             writer.Write( (byte)3 ); // Application block length
             writer.Write( (byte)1 );
-            writer.Write( (short)repeat ); // Repeat count for images.
+            writer.Write( (short)0 ); // Repeat count for images.
             writer.Write( (byte)0 ); // terminator
         }
 

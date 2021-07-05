@@ -56,10 +56,11 @@ namespace GIF_Maker
 
             System.Windows.Forms.PictureBox imageBox = new System.Windows.Forms.PictureBox();
             imageBox.Image = imageTimelineList.Last();
-            imageBox.Height = imageTimelinePanel.Height;
-            imageBox.Width = imageTimelinePanel.Height;
+            imageBox.Height = imageTimelinePanel.Height/2;
+            imageBox.Width = imageTimelinePanel.Height/2;
             imageBox.SizeMode = PictureBoxSizeMode.StretchImage;
 
+            imageTimelinePanel.Width += imageTimelinePanel.Height;
             imageTimelinePanel.Controls.Add(imageBox);
             //imageTimelinePanel.Controls.IndexOf(0);
         }
@@ -119,7 +120,5 @@ namespace GIF_Maker
                 imageResized.AddLast(ImageResize.Resize(image, (int)numericWidth.Value, (int)numericHeight.Value));
             }
         }
-
-
     }
 }
