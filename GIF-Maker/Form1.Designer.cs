@@ -52,6 +52,8 @@ namespace GIF_Maker
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.labelWidth = new System.Windows.Forms.Label();
             this.numericWidth = new System.Windows.Forms.NumericUpDown();
+            this.contextImageMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMain)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -63,6 +65,7 @@ namespace GIF_Maker
             ((System.ComponentModel.ISupportInitialize)(this.numericHeight)).BeginInit();
             this.flowLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericWidth)).BeginInit();
+            this.contextImageMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -367,6 +370,21 @@ namespace GIF_Maker
             0,
             0});
             // 
+            // contextImageMenu
+            // 
+            this.contextImageMenu.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.contextImageMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteToolStripMenuItem});
+            this.contextImageMenu.Name = "contextImageMenu";
+            this.contextImageMenu.Size = new System.Drawing.Size(159, 42);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(158, 38);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
@@ -389,6 +407,7 @@ namespace GIF_Maker
             ((System.ComponentModel.ISupportInitialize)(this.numericHeight)).EndInit();
             this.flowLayoutPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericWidth)).EndInit();
+            this.contextImageMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -417,6 +436,8 @@ namespace GIF_Maker
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button buttonPlay;
+        private System.Windows.Forms.ContextMenuStrip contextImageMenu;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
     }
 }
 

@@ -62,9 +62,13 @@ namespace GIF_Maker
             imageBox.SizeMode = PictureBoxSizeMode.StretchImage;
 
 
-            ImageClickEventArgs args = new ImageClickEventArgs();
-            args.Index = imageTimelineList.Count;
-            imageBox.Click += new EventHandler((s, e) => timelineImage_Click(s, args));
+            //ImageClickEventArgs args = new ImageClickEventArgs();
+            //args.Index = imageTimelineList.Count;
+            //imageBox.Click += new EventHandler((s, e) => timelineImage_Click(s, args));
+
+            imageBox.Click += timelineImage_Click;
+            imageBox.ContextMenuStrip = contextImageMenu;
+
 
             imageTimelinePanel.Width += imageTimelinePanel.Height;
             imageTimelinePanel.Controls.Add(imageBox);
@@ -129,7 +133,7 @@ namespace GIF_Maker
         }
 
 
-        public void timelineImage_Click(object sender, ImageClickEventArgs e)
+        public void timelineImage_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.PictureBox box = sender as System.Windows.Forms.PictureBox;
 
@@ -146,14 +150,21 @@ namespace GIF_Maker
                 selectedImage.BorderStyle = BorderStyle.Fixed3D;
             }
 
-            pictureBoxMain.Image = ImageResize.Resize( imageTimelineList.ElementAt(e.Index), (int)numericWidth.Value, (int)numericHeight.Value);
-            consoleLabel.Text = ""+e.Index;
+            pictureBoxMain.Image = ImageResize.Resize(box.Image, (int)numericWidth.Value, (int)numericHeight.Value);
         }
-    }
 
-    public class ImageClickEventArgs : EventArgs
-    {
-        public int Index { get; set; }
-        //public DateTime TimeReached { get; set; }
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            System.Windows.Forms.PictureBox box = (System.Windows.Forms.PictureBox)contextImageMenu.SourceControl;
+
+            if (box == selectedImage)
+                pictureBoxMain.Image = null;
+
+            imageTimelineList.Remove(box.Image);
+            imageTimelinePanel.Controls.Remove(box);
+            box.Dispose();
+            
+        }
     }
 }
